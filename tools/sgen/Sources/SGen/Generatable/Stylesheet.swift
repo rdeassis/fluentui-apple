@@ -839,7 +839,7 @@ extension Stylesheet {
     }
     
     func generateExtensionsHeader() -> String {
-        let visibility = "private"
+        let visibility = ""
         var header = ""
 
         if Generator.Config.importStylesheetManagerName != nil {
@@ -1110,7 +1110,7 @@ private class FluentUIFontCache: NSObject {
 
 \(visibility) var scalableHandle: UInt8 = 0
 
-private extension UIFont {
+extension UIFont {
     private static var cache = FluentUIFontCache()
 
 """
