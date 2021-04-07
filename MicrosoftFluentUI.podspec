@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = 'MicrosoftFluentUI'
-  s.version          = '0.2.4'
+  s.version          = '0.0.18'
   s.summary          = 'Fluent UI is a set of reusable UI controls and tools'
   s.homepage         = "https://www.microsoft.com/design/fluent/#/"
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { "Microsoft" => "fluentuinativeowners@microsoft.com"}
-  s.source       = { :git => "https://github.com/microsoft/fluentui-apple.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/rdeassis/fluentui-apple.git", :branch => 'privateVnextPod', :tag => "#{s.version}_privateVnextPod" }
   s.swift_version = "5.0"
   s.module_name = 'FluentUI'
 
@@ -16,9 +16,15 @@ Pod::Spec.new do |s|
 
   s.subspec 'Avatar_ios' do |avatar_ios|
     avatar_ios.platform = :ios
-    avatar_ios.dependency 'MicrosoftFluentUI/Core_ios'
-    avatar_ios.preserve_paths = ["ios/FluentUI/Avatar/Avatar.resources.xcfilelist"]
-    avatar_ios.source_files = ["ios/FluentUI/Avatar/**/*.{swift,h}"]
+    avatar_ios.dependency 'MicrosoftFluentUI/AvatarLegacy_ios'
+    avatar_ios.source_files = ["ios/FluentUI/Vnext/Avatar/**/*.{swift,h}"]
+  end
+
+  s.subspec 'AvatarLegacy_ios' do |avatarlegacy_ios|
+    avatarlegacy_ios.platform = :ios
+    avatarlegacy_ios.dependency 'MicrosoftFluentUI/Core_ios'
+    avatarlegacy_ios.preserve_paths = ["ios/FluentUI/Avatar/Avatar.resources.xcfilelist"]
+    avatarlegacy_ios.source_files = ["ios/FluentUI/Avatar/**/*.{swift,h}"]
   end
 
   s.subspec 'ActivityViewAnimating_ios' do |activityviewanimating_ios|
@@ -49,7 +55,13 @@ Pod::Spec.new do |s|
   s.subspec 'Button_ios' do |button_ios|
     button_ios.platform = :ios
     button_ios.dependency 'MicrosoftFluentUI/Core_ios'
-    button_ios.source_files = ["ios/FluentUI/Button/**/*.{swift,h}"]
+    button_ios.source_files = ["ios/FluentUI/Vnext/Button/**/*.{swift,h}"]
+  end
+
+  s.subspec 'ButtonLegacy_ios' do |buttonlegacy_ios|
+    buttonlegacy_ios.platform = :ios
+    buttonlegacy_ios.dependency 'MicrosoftFluentUI/Core_ios'
+    buttonlegacy_ios.source_files = ["ios/FluentUI/Button/**/*.{swift,h}"]
   end
 
   s.subspec 'Calendar_ios' do |calendar_ios|
@@ -101,7 +113,7 @@ xcodebuild ${XCODEBUILDPARAMS} -project ${PROJECT_FILE_PATH} -target "MicrosoftF
     core_ios.source_files = ["ios/FluentUI/Configuration/**/*.{swift,h}",
                              "ios/FluentUI/Core/**/*.{swift,h}",
                              "ios/FluentUI/Extensions/**/*.{swift,h}",
-                             "ios/FluentUI/Vnext/Core/FluentUIStyle.generated.swift"]
+                             "ios/FluentUI/Vnext/Core/**/*.{swift,h}"]
   end
 
   s.subspec 'DotView_ios' do |dotview_ios|
@@ -146,10 +158,16 @@ xcodebuild ${XCODEBUILDPARAMS} -project ${PROJECT_FILE_PATH} -target "MicrosoftF
     label_ios.source_files = ["ios/FluentUI/Label/**/*.{swift,h}"]
   end
 
+  s.subspec 'List_ios' do |list_ios|
+    list_ios.platform = :ios
+    list_ios.dependency 'MicrosoftFluentUI/Core_ios'
+    list_ios.source_files = ["ios/FluentUI/Vnext/List/**/*.{swift,h}"]
+  end
+
   s.subspec 'Navigation_ios' do |navigation_ios|
     navigation_ios.platform = :ios
     navigation_ios.dependency 'MicrosoftFluentUI/ActivityIndicator_ios'
-    navigation_ios.dependency 'MicrosoftFluentUI/Avatar_ios'
+    navigation_ios.dependency 'MicrosoftFluentUI/AvatarLegacy_ios'
     navigation_ios.dependency 'MicrosoftFluentUI/Separator_ios'
     navigation_ios.dependency 'MicrosoftFluentUI/TwoLineTitleView_ios'
     navigation_ios.preserve_paths = ["ios/FluentUI/Navigation/Navigation.resources.xcfilelist"]
@@ -181,7 +199,7 @@ xcodebuild ${XCODEBUILDPARAMS} -project ${PROJECT_FILE_PATH} -target "MicrosoftF
 
   s.subspec 'PeoplePicker_ios' do |peoplepicker_ios|
     peoplepicker_ios.platform = :ios
-    peoplepicker_ios.dependency 'MicrosoftFluentUI/Avatar_ios'
+    peoplepicker_ios.dependency 'MicrosoftFluentUI/AvatarLegacy_ios'
     peoplepicker_ios.dependency 'MicrosoftFluentUI/BadgeField_ios'
     peoplepicker_ios.dependency 'MicrosoftFluentUI/Separator_ios'
     peoplepicker_ios.dependency 'MicrosoftFluentUI/OtherCells_ios'
@@ -242,7 +260,7 @@ xcodebuild ${XCODEBUILDPARAMS} -project ${PROJECT_FILE_PATH} -target "MicrosoftF
 
   s.subspec 'TabBar_ios' do |tabbar_ios|
     tabbar_ios.platform = :ios
-    tabbar_ios.dependency 'MicrosoftFluentUI/Avatar_ios'
+    tabbar_ios.dependency 'MicrosoftFluentUI/AvatarLegacy_ios'
     tabbar_ios.dependency 'MicrosoftFluentUI/Label_ios'
     tabbar_ios.dependency 'MicrosoftFluentUI/Separator_ios'
     tabbar_ios.source_files = ["ios/FluentUI/Tab Bar/**/*.{swift,h}"]
